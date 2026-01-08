@@ -10,7 +10,7 @@ def _save_and_clean(filename: str):
     """
     Helper function to save the plot and close the figure to prevent memory issues.
     """
-    output_dir = "../reports/figures/"
+    output_dir = "../reports/figures"
     os.makedirs(output_dir, exist_ok=True)
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, filename))
@@ -152,7 +152,7 @@ def plot_categorical_counts(df: pd.DataFrame, column: str):
                 raise KeyError(f"No columns matching '{column}' found.")
 
         plt.figure(figsize=(10, 6))
-        sns.countplot(data=df, x=column, palette='viridis')
+        sns.countplot(data=df, x=column, hue=column, palette='viridis', legend=False)
         plt.title(f'Frequency of {column}')
         plt.xticks(rotation=45)
 
@@ -186,7 +186,7 @@ def plot_outlier_boxplot(df: pd.DataFrame, columns: list):
         plt.figure(figsize=(12, 6))
         # Melt dataframe to plot multiple numerical columns together
         melted_df = df[columns].melt()
-        sns.boxplot(x='variable', y='value', data=melted_df)
+        sns.boxplot(x='variable', y='value', hue='variable', data=melted_df, legend=False)
         plt.title('Outlier Analysis of Key Variables')
         plt.xticks(rotation=45)
 
@@ -220,7 +220,7 @@ def plot_violin_by_category(df: pd.DataFrame, cat_col: str, num_col: str):
     """
     try:
         plt.figure(figsize=(12, 6))
-        sns.violinplot(data=df, x=cat_col, y=num_col, palette='muted')
+        sns.violinplot(data=df, x=cat_col, y=num_col, hue=cat_col, palette='muted', legend=False)
         plt.title(f'{num_col} Density by {cat_col}')
 
         _save_and_clean(f"violin_{cat_col}_{num_col}.png")
