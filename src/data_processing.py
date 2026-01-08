@@ -50,4 +50,46 @@ def preprocess_data(df: pd.DataFrame, fill_strategy: str) -> pd.DataFrame:
         raise
 
 
+def handle_outliers(df: pd.DataFrame, columns: list) -> pd.DataFrame:
+    """
+    Detect and address outliers using the Interquartile Range (IQR) method.
+
+    Parameters:
+    ----------
+    df : pd.DataFrame
+        The input DataFrame containing potential outliers.
+    columns :
+        List of numerical column names to be checked for outliers.
+
+    Returns:
+    ----------
+    pd.DataFrame
+        Cleaned DataFrame with outliers removed based on the 1.5 * IQR rule.
+
+    Raises:
+    ----------
+    KeyError
+        If any of the specified columns are not present in the DataFrame.
+    """
+    try:
+        df = df.copy()
+        for col in columns:
+            if col not in df.columns:
+                raise KeyError(f"Column '{col}' not found in DataFrame.")
+
+            Q1 = df[col].quantile(0.25)
+            Q3 = df[col].quantile(0.75)
+            IQR = Q3 - Q1
+            lower_bound = Q1 - 1.5 * IQR
+            upper_bound = Q3 + 1.5 * IQR
+
+            # Capping outliers to prevent data loss while maintaining data integrity
+            df = df[(df[col] >= lower_bound) & (df[col] <= upper_bound)]
+
+        return df
+    except Exception as e:
+        print(f"Error handling outliers: {e}")
+        raise
+
+
 
