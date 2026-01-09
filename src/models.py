@@ -127,7 +127,7 @@ def save_results(metrics: dict, filename: str):
     try:
         # Determine path based on current directory (notebooks vs root)
         if os.path.basename(os.getcwd()) == 'notebooks':
-            output_dir = "../reports/results"
+            output_dir = "../reports/results/"
         else:
             output_dir = "reports/results"
 

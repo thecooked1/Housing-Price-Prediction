@@ -1,0 +1,11 @@
+{
+    "Linear_Regression": {
+        "R2": 0.6116,
+        "MSE": 3359271807.5834
+    },
+    "Decision_Tree": {
+        "R2": 0.5669,
+        "MSE": 3746393949.6182
+    },
+    "Top_Feature": "median_income"
+}
