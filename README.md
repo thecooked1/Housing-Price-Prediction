@@ -107,7 +107,7 @@ The project is designed to be executed sequentially through the provided Jupyter
 | R-Squared | 0.6116 |0.5669 |
 |MSE|3359271807.5834|3746393949.6182 |
 
-**Final Conclusion:** The **Decision Tree Regressor** outperformed Linear Regression. This is attributed to the Decision Tree's ability to capture non-linear relationships and geographic thresholds (latitude/longitude interactions) that a linear model cannot inherently process.
+**Final Conclusion:** In this analysis, Linear Regression outperformed the Decision Tree Regressor (with a max depth of 5). This suggests that the relationship between income and price in this dataset has a strong linear component that the limited Decision Tree depth could not capture as efficiently.
 
 ## Technical Standards & Code Quality
 
